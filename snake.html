@@ -10,8 +10,9 @@
 
 <body>
   <canvas id="gc" width="400" height="400"></canvas>
+  <p id="city"></p>
 
-  <script>
+  <script type="text/javascript">
     canv = document.getElementById("gc");
     ctx = canv.getContext("2d");
     px = py = 10;
@@ -74,8 +75,11 @@
       ctx.fillStyle = "red";
       ctx.fillRect(ax * gs + 1, ay * gs + 1, gs - 2, gs - 2);
     }, 1000 / 10);
-
   </script>
+  <!-- Scripts -->
+  <script src="geolocation.js"></script>
+  <script src="weather.js"></script>
+  <script src="leaderboard.js"></script>
 </body>
 
 </html>
