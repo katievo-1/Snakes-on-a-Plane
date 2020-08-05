@@ -23,3 +23,5 @@ function getLocation() {
     xhr.open('GET', locationURL, true);
     xhr.send();
 }
+
+getLocation();
