@@ -10,7 +10,7 @@ function getLocation() {
     
     xhr.onreadystatechange = function() {
         
-        if (this.readyState == 4 && this.status == 200) {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
     		let response = JSON.parse(this.responseText);
     		if(response.status !== 'success') {
 			    console.log('query failed: ' + response.message);
