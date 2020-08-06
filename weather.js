@@ -1,33 +1,29 @@
-// navigator.geolocation.getCurrentPosition(success, error);
-// const secretWeatherKey = "72a83cad684431418e2c8f3089cf7bef";
+// 2213054 Cincinnati Location Key
 
-//     function success(position) {
-//         console.log(position.coords.latitude)
-//         console.log(position.coords.longitude)
-//         console.log("Latitude: " + position.coords.latitude + 
-//         "<br>Longitude: " + position.coords.longitude);
-//         let weatherURL = "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + secretWeatherKey;
+navigator.geolocation.getCurrentPosition(success, error);
+    function success(position) {
+        console.log("Latitude: " + position.coords.latitude + 
+        " Longitude: " + position.coords.longitude);
 
-//         // Fetch the weather data from API
-    
-//         let xhr = new XMLHttpRequest();
-        
-//         xhr.onreadystatechange = function() {
-            
-//             if (this.readyState == 4 && this.status == 200) {
-//                 let response = JSON.parse(this.responseText);
-//                 if(response.status !== 'success') {
-//                     console.log('query failed: ' + response.message);
-//                     return
-//                 }
-                
-//                 console.log(response.current.weather.id);
-//             }
-//         };
-//         xhr.open('GET', weatherURL, true);
-//         xhr.setRequestHeader("secret-key", secretWeatherKey);
-//         xhr.send();
-//     }
-//     function error(err) {
-//         console.log(err)
-//     }
+        let locationGeoURL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q" + 
+        position.coords.latitude + "%2C" + position.coords.longitude;
+
+        let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+    		        let response = JSON.parse(this.responseText);
+    		        if(response.status !== 'success') {
+			            console.log('query failed: ' + response.message);
+		    	        return
+                    }
+                    console.log(response.key);
+                    return response.key
+	            }
+        };
+        xhr.open('GET', locationGeoURL, true);
+        xhr.send();
+    }
+    function error() {
+        console.log("Error getting latitude and longitude");
+    }
