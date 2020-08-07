@@ -1,6 +1,6 @@
 let city = document.getElementById("city");
 
-const locationURL = 'http://ip-api.com/json/?fields=status,message,country,countryCode,region,city,zip';
+const locationURL = 'https://ip-api.com/json/?fields=status,message,country,countryCode,region,city,zip';
 
 function getLocation() {
 

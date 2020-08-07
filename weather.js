@@ -3,7 +3,7 @@
 
 navigator.geolocation.getCurrentPosition((position) => {
     // Uses latitude and longitude to find location key
-    let locationGeoURL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q=" +
+    let locationGeoURL = "https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q=" +
         position.coords.latitude + "%2C" + position.coords.longitude;
 
     getLocation(locationGeoURL);
@@ -18,7 +18,7 @@ function getLocation(locationGeoURL) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let response = JSON.parse(this.responseText);
             if (response) {
-                let currentConditionsURL = "http://dataservice.accuweather.com/currentconditions/v1/" + response.Key + "?apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&language=en-us&details=false"
+                let currentConditionsURL = "https://dataservice.accuweather.com/currentconditions/v1/" + response.Key + "?apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&language=en-us&details=false"
 
                 // Use Current Conditions API
                 getCurrentConditions(currentConditionsURL);
