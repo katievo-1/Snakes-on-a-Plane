@@ -14,8 +14,6 @@ function getLeaderboard() {
 
       leaderBoardData = JSON.parse(req.responseText);
 
-      console.log(leaderBoardData);
-
       // Load data to leaderboard table
       const leaderBoardDiv = document.getElementById("leaderboard");
       const oldTBody = leaderBoardDiv.getElementsByTagName("tbody")[0];

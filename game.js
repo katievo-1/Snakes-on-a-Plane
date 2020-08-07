@@ -1,3 +1,7 @@
+// Weather icon
+weatherIcon = new Image();
+temperature = 0;
+
 // Get reference to canvas using ID
 canv = document.getElementById("gc");
 
@@ -76,8 +80,10 @@ setInterval(function () {
   }
 
   // Draw the background on canvas
-  ctx.fillStyle = "black";
+  ctx.fillStyle = temperature === 0 ? "black" : temperature >= 60 ? "#ff852e" : "#2e8cff";
   ctx.fillRect(0, 0, canv.width, canv.height);
+
+  ctx.drawImage(weatherIcon, 10, 10);
 
   // Draw the snake on canvas
   ctx.fillStyle = "lime";
@@ -87,8 +93,8 @@ setInterval(function () {
 
     if (trail[i].x == px && trail[i].y == py) {
       // px & py is where the head is. If the head hits one segment of the snake, game over
-      
-      if(isGameStarted) {
+
+      if (isGameStarted) {
         // update leaderboard data
         tryAddToLeaderboard(tail);
       }
@@ -124,6 +130,6 @@ setInterval(function () {
   ctx.fillRect(ax * gridSize + 1, ay * gridSize + 1, gridSize - 2, gridSize - 2);
 },
 
-// Game loop time. The interval between each time the game refreshes. I.e. 1000/10 = 100 ms
-// Snake speed is also affected by game loop time. Smaller time = faster speed.
-1000 / 10);
+  // Game loop time. The interval between each time the game refreshes. I.e. 1000/10 = 100 ms
+  // Snake speed is also affected by game loop time. Smaller time = faster speed.
+  1000 / 10);
