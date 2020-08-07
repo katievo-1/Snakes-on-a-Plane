@@ -8,7 +8,7 @@ navigator.geolocation.getCurrentPosition(success, error);
         " Longitude: " + position.coords.longitude);
 
         // Uses latitude and longitude to find location key
-        let locationGeoURL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q" + 
+        let locationGeoURL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q=" + 
         position.coords.latitude + "%2C" + position.coords.longitude;
         getLocation(locationGeoURL);
     }
@@ -26,13 +26,32 @@ function getLocation(locationGeoURL) {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
     		        let response = JSON.parse(this.responseText);
     		        if(response.status !== 'success') {
-			            console.log('query failed: ' + response.message);
+			            console.log('query failed: ' + response.message); // Stops working here
 		    	        return
                     }
+                    let currentConditionsURL = "http://dataservice.accuweather.com/currentconditions/v1/" + response.Key +"?apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&language=en-us&details=false"
                     console.log(response.Key);
-                    return response.Key
+                    getCurrentConditions(currentConditionsURL);
 	            } // Use Current Conditions API
         };
         xhr.open('GET', locationGeoURL, true);
+        xhr.send();
+}
+
+function getCurrentConditions(currentConditionsURL) {
+    let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() {
+
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+    		        let response = JSON.parse(this.responseText);
+    		        if(response.status !== 'success') {
+			            console.log('query failed: ' + response.message);
+		    	        return
+                    }
+                    console.log(response.WeatherText);
+	            }
+        };
+        xhr.open('GET', currentConditionsURL, true);
         xhr.send();
 }
