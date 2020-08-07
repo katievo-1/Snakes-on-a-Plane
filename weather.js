@@ -10,8 +10,16 @@ navigator.geolocation.getCurrentPosition(success, error);
         // Uses latitude and longitude to find location key
         let locationGeoURL = "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?&apikey=R9vyjjt7tucL6SgBngZFXeGFpXrfoYyg&q" + 
         position.coords.latitude + "%2C" + position.coords.longitude;
+        getLocation(locationGeoURL);
+    }
+    function error() {
+        console.log("Error getting latitude and longitude");
+    }
 
-        let xhr = new XMLHttpRequest();
+
+function getLocation(locationGeoURL) {
+
+    let xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function() {
 
@@ -27,7 +35,4 @@ navigator.geolocation.getCurrentPosition(success, error);
         };
         xhr.open('GET', locationGeoURL, true);
         xhr.send();
-    }
-    function error() {
-        console.log("Error getting latitude and longitude");
-    }
+}
